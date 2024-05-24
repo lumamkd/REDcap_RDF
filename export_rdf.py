@@ -10,7 +10,7 @@ from rdflib.namespace import DC, FOAF, DCTERMS
 # Create a Graph
 g = Graph()
 
-AHRIRedcap = Namespace("ttps://population.ahri.org/redcap_v14.0.17/")
+AHRIRedcap = Namespace("https://population.ahri.org/redcap_v14.0.17/")
 AHRIRedcapRecord = Namespace("https://population.ahri.org/redcap_v14.0.17/record/")
 SIO = Namespace("http://semanticscience.org/resource/")
 
