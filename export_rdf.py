@@ -15,7 +15,7 @@ AHRIRedcapRecord = Namespace("https://population.ahri.org/api/record/")
 # SIO = Namespace("http://semanticscience.org/resource/")
 
 fields = {
-    'token': '0DCE4F323E6609217BC75EA134DB8ACA',
+    'token': '',
     'content': 'record',
     'action': 'export',
     'format': 'json',
