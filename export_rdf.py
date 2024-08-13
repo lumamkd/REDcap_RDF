@@ -10,27 +10,35 @@ from rdflib.namespace import DC, FOAF, DCTERMS
 # Create a Graph
 g = Graph()
 
-AHRIRedcap = Namespace("https://population.ahri.org/redcap_v14.0.17/")
-AHRIRedcapRecord = Namespace("https://population.ahri.org/redcap_v14.0.17/record/")
-SIO = Namespace("http://semanticscience.org/resource/")
+AHRIRedcap = Namespace("https://population.ahri.org/api/")
+AHRIRedcapRecord = Namespace("https://population.ahri.org/api/record/")
+# SIO = Namespace("http://semanticscience.org/resource/")
 
 fields = {
-    'token': config['api_token'],
+    'token': '0DCE4F323E6609217BC75EA134DB8ACA',
     'content': 'record',
+    'action': 'export',
     'format': 'json',
-    'type': 'flat'
+    'type': 'flat',
+    'csvDelimiter': '',
+    'rawOrLabel': 'raw',
+    'rawOrLabelHeaders': 'raw',
+    'exportCheckboxLabel': 'false',
+    'exportSurveyFields': 'false',
+    'exportDataAccessGroups': 'false',
+    'returnFormat': 'json'
 }
 
 r = requests.post(config['api_url'],data=fields)
 print('HTTP Status: ' + str(r.status_code))
-print(r.text)
+print(r.json())
 
-results = json.loads(r.text)
+results = r.json()
 #pprint.pprint(results)
 print(len(results))
 
 for row in results:
-    g.add((AHRIRedcap[row['record_id']], RDF.type, SIO["000088"]))
+    # g.add((AHRIRedcap[row['record_id']], RDF.type, SIO["000088"]))
     for key, value in row.items():
         if value:  # Check if the value is not empty
             g.add((AHRIRedcapRecord[row['record_id']], AHRIRedcap[key], Literal(value)))
