@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from config import config
 import requests
 import json
 import pprint
@@ -10,12 +9,13 @@ from rdflib.namespace import DC, FOAF, DCTERMS
 # Create a Graph
 g = Graph()
 
-AHRIRedcap = Namespace("https://population.ahri.org/api/")
+AHRIRedcapURL = "https://population.ahri.org/api/"
+AHRIRedcap = Namespace(AHRIRedcapURL)
 AHRIRedcapRecord = Namespace("https://population.ahri.org/api/record/")
 # SIO = Namespace("http://semanticscience.org/resource/")
 
 fields = {
-    'token': '',
+    'token': '1D6C6290BE8B3F190DCF6DC4BE679272',
     'content': 'record',
     'action': 'export',
     'format': 'json',
@@ -29,7 +29,7 @@ fields = {
     'returnFormat': 'json'
 }
 
-r = requests.post(config['api_url'],data=fields)
+r = requests.post(AHRIRedcapURL,data=fields)
 print('HTTP Status: ' + str(r.status_code))
 print(r.json())
 
